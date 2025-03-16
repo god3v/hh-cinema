@@ -5,16 +5,16 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "theater")
+@Entity(name = "screen")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class TheaterEntity extends BaseEntity {
+public class ScreenEntity extends BaseEntity {
 
     @Id
-    @Column(name = "theater_id")
+    @Column(name = "screen_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 상영관 ID
 
     @Column(nullable = false)
-    private String name; // 상영관 이름
+    private String screenName; // 상영관 이름
 }

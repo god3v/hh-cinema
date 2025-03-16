@@ -13,6 +13,11 @@ services:
       - '3306:3306' # [host]:[container]
     volumes: # volumes 설정하지 않을 시 MySQL 컨테이너가 종료되면 컨테이너 내부의 데이터가 삭제됨
       - 'mysql_cinema_data:/var/lib/mysql' # 데이터 영구 저장
+    command: [
+      "--character-set-server=utf8mb4",           # MySQL 서버 기본 문자 집합을 utf8mb4로 설정
+      "--collation-server=utf8mb4_general_ci",    # MySQL 서버 기본 정렬 규칙을 utf8mb4_general_ci로 설정
+      "--default-time-zone=Asia/Seoul"            # MySQL 서버 기본 타임존을 KST(+09:00)로 설정
+    ]
 
 volumes:
   mysql_cinema_data:

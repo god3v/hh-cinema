@@ -23,14 +23,14 @@ public class MovieEntity extends BaseEntity {
     private String title; // 영화 제목
 
     @Enumerated(EnumType.STRING)
-    private MovieRating movie_rating; // 영상물 등급
+    private MovieRating movieRating; // 영상물 등급
 
-    private LocalDate release_date; // 개봉일
+    private LocalDate releaseDate; // 개봉일
 
-    private String thumbnail_url; // 썸네일 이미지 URL
+    private String thumbnailUrl; // 썸네일 이미지 URL
 
     @Column(nullable = false)
-    private int duration_time; // 러닝 타임(분)
+    private int runningTime; // 러닝 타임(분)
 
     @Enumerated(EnumType.STRING)
     private MovieGenre genre; // 영화 장르

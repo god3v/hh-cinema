@@ -17,16 +17,16 @@ import java.time.LocalDateTime;
 public class BaseEntity {
 
     @Column(updatable = false)
-    private Long created_by; // 작성자 ID
+    private Long createdBy; // 작성자 ID
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime created_at; // 작성 일시
+    private LocalDateTime createdAt; // 작성 일시
 
     @Column(insertable = false)
-    private Long updated_by; // 수정자 ID
+    private Long updatedBy; // 수정자 ID
 
     @UpdateTimestamp
     @Column(insertable = false)
-    private LocalDateTime updated_at; // 수정 일시
+    private LocalDateTime updatedAt; // 수정 일시
 }

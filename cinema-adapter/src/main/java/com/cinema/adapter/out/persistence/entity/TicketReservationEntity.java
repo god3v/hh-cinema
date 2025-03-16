@@ -20,8 +20,8 @@ public class TicketReservationEntity extends BaseEntity {
     private ScreeningScheduleEntity screeningSchedule; // 상영 일정 ID
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "theater_seat_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private TheaterSeatEntity theaterSeat; // 상영관 좌석 ID
+    @JoinColumn(name = "screen_seat_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private ScreenSeatEntity screenSeat; // 상영관 좌석 ID
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
