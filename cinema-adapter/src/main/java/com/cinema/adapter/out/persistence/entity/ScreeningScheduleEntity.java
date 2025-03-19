@@ -24,10 +24,10 @@ public class ScreeningScheduleEntity extends BaseEntity {
     private LocalDateTime endAt; // 상영 종료 시간
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "movie_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
     private MovieEntity movie; // 영화 ID
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "screen_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "screen_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
     private ScreenEntity screen; // 상영관 ID
 }

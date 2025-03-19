@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class BaseEntity {
 
-    @Column(updatable = false)
+    @Column(updatable = false, nullable = false)
     private Long createdBy; // 작성자 ID
 
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt; // 작성 일시
 
     @Column(insertable = false)

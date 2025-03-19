@@ -16,7 +16,7 @@ public class ScreenSeatEntity extends BaseEntity {
     private Long id; // 상영관 좌석 ID
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "screen_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "screen_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
     private ScreenEntity screen; // 상영관 ID
 
     @Column(name = "seat_row", nullable = false)

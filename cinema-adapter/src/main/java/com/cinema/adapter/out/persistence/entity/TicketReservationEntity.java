@@ -16,14 +16,14 @@ public class TicketReservationEntity extends BaseEntity {
     private Long id; // 영화 예매 ID
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "screening_schedule_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "screening_schedule_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
     private ScreeningScheduleEntity screeningSchedule; // 상영 일정 ID
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "screen_seat_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "screen_seat_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
     private ScreenSeatEntity screenSeat; // 상영관 좌석 ID
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
     private UserEntity user; // 회원 ID
 }
