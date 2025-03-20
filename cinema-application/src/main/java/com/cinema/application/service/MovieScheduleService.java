@@ -1,6 +1,8 @@
 package com.cinema.application.service;
 
-import com.cinema.application.dto.MovieScheduleResponseDto;
+import com.cinema.application.dto.MovieScheduleQueryResult;
+import com.cinema.application.dto.MovieScheduleQuery;
+import com.cinema.application.mapper.MovieScheduleApplicationMapper;
 import com.cinema.application.port.in.MovieScheduleUseCase;
 import com.cinema.application.port.out.MovieSchedulePort;
 import com.cinema.domain.model.MovieSchedule;
@@ -19,8 +21,8 @@ public class MovieScheduleService implements MovieScheduleUseCase {
     private final MovieSchedulePort movieSchedulePort;
 
     @Override
-    public List<MovieScheduleResponseDto> getNowPlayingMovies() {
-        List<MovieSchedule> schedules = movieSchedulePort.findNowPlayingMovies();
+    public List<MovieScheduleQueryResult> getNowPlayingMovies(MovieScheduleQuery query) {
+        List<MovieSchedule> schedules = movieSchedulePort.findNowPlayingMovies(MovieScheduleApplicationMapper.toDomain(query));
 
         Map<Long, MovieScheduleQueryResult> movieMap = new HashMap<>();
 

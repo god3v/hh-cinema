@@ -3,7 +3,7 @@ package com.cinema.adapter.out.persistence;
 import com.cinema.adapter.out.persistence.entity.QMovieEntity;
 import com.cinema.adapter.out.persistence.entity.QScreenEntity;
 import com.cinema.adapter.out.persistence.entity.QScreeningScheduleEntity;
-import com.cinema.adapter.out.persistence.mapper.MovieScheduleMapper;
+import com.cinema.adapter.out.persistence.mapper.MovieSchedulePersistenceMapper;
 import com.cinema.adapter.out.persistence.projection.MovieScheduleProjection;
 import com.cinema.application.port.out.MovieSchedulePort;
 import com.cinema.domain.model.MovieSchedule;
@@ -25,7 +25,7 @@ public class MovieScheduleAdapter implements MovieSchedulePort {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<MovieSchedule> findNowPlayingMovies() {
+    public List<MovieSchedule> findNowPlayingMovies(MovieSchedule movieSchedule) {
         QMovieEntity movie = QMovieEntity.movieEntity;
         QScreeningScheduleEntity schedule = QScreeningScheduleEntity.screeningScheduleEntity;
         QScreenEntity screen = QScreenEntity.screenEntity;
