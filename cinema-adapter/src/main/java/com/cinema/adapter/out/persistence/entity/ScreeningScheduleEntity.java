@@ -18,10 +18,10 @@ public class ScreeningScheduleEntity extends BaseEntity {
     private Long id; // 상영 일정 ID
 
     @Column(nullable = false)
-    private LocalDateTime startAt; // 상영 시작 시간
+    private LocalDateTime startedAt; // 상영 시작 시간
 
     @Column(nullable = false)
-    private LocalDateTime endAt; // 상영 종료 시간
+    private LocalDateTime endedAt; // 상영 종료 시간
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)

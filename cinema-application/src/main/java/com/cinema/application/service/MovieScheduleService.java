@@ -22,27 +22,19 @@ public class MovieScheduleService implements MovieScheduleUseCase {
     public List<MovieScheduleResponseDto> getNowPlayingMovies() {
         List<MovieSchedule> schedules = movieSchedulePort.findNowPlayingMovies();
 
-        Map<Long, MovieScheduleResponseDto> movieMap = new HashMap<>();
+        Map<Long, MovieScheduleQueryResult> movieMap = new HashMap<>();
 
         for (MovieSchedule schedule : schedules) {
             Long movieId = schedule.id();
 
-            MovieScheduleResponseDto movieSchedule = movieMap.computeIfAbsent(movieId, id -> MovieScheduleResponseDto.builder()
-                    .movieId(schedule.id())
-                    .title(schedule.title())
-                    .rating(schedule.movieRating().getDescription())
-                    .releaseDate(schedule.releaseDate())
-                    .thumbnailUrl(schedule.thumbnailUrl())
-                    .runningTime(schedule.runningTime())
-                    .genre(schedule.genre().getDescription())
-                    .schedules(new ArrayList<>())
-                    .build()
+            MovieScheduleQueryResult movieSchedule = movieMap.computeIfAbsent(movieId, id ->
+                    MovieScheduleApplicationMapper.toDTO(schedule)
             );
 
-            movieSchedule.addSchedule(MovieScheduleResponseDto.Schedule.builder()
+            movieSchedule.addSchedule(MovieScheduleQueryResult.Schedule.builder()
                     .screenName(schedule.screenName())
-                    .startAt(schedule.startAt())
-                    .endAt(schedule.endAt())
+                    .startedAt(schedule.startedAt())
+                    .endedAt(schedule.endedAt())
                     .build());
         }
 

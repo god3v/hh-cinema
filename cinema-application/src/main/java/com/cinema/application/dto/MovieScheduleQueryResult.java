@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
-public record MovieScheduleResponseDto(
+public record MovieScheduleQueryResult(
         Long movieId,
         String title,
         String rating,
@@ -24,8 +24,8 @@ public record MovieScheduleResponseDto(
     @Builder
     public record Schedule (
             String screenName,
-            LocalDateTime startAt,
-            LocalDateTime endAt
+            LocalDateTime startedAt,
+            LocalDateTime endedAt
     ) {
     }
 }

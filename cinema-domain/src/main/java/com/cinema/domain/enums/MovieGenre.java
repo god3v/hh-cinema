@@ -14,4 +14,13 @@ public enum MovieGenre {
     ROMANCE("로맨스");
 
     private final String description;
+
+    public static MovieGenre fromDescription(String description) {
+        for (MovieGenre genre : MovieGenre.values()) {
+            if (genre.getDescription().equalsIgnoreCase(description)) {
+                return genre;
+            }
+        }
+        throw new IllegalArgumentException("Unknown genre: " + description);
+    }
 }

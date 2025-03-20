@@ -2,8 +2,11 @@ package com.cinema.adapter.out.persistence.mapper;
 
 import com.cinema.adapter.out.persistence.projection.MovieScheduleProjection;
 import com.cinema.domain.model.MovieSchedule;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
-public class MovieScheduleMapper {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class MovieSchedulePersistenceMapper {
 
     public static MovieSchedule toDomain(MovieScheduleProjection projection) {
         return new MovieSchedule(
@@ -15,8 +18,8 @@ public class MovieScheduleMapper {
                 projection.getRunningTime(),
                 projection.getGenre(),
                 projection.getScreenName(),
-                projection.getStartAt(),
-                projection.getEndAt()
+                projection.getStartedAt(),
+                projection.getEndedAt()
         );
     }
 }

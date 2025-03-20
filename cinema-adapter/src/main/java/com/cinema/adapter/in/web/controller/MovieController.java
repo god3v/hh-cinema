@@ -24,5 +24,6 @@ public class MovieController {
     public ResponseEntity<List<MovieScheduleResponseDto>> getNowPlayingMovies() {
         List<MovieScheduleResponseDto> result = movieScheduleUseCase.getNowPlayingMovies();
         return ResponseEntity.ok(result);
+        return ResponseEntity.ok(MovieScheduleMapper.toResponseList(result));
     }
 }

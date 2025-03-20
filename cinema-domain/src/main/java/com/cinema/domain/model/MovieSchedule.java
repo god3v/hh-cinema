@@ -2,10 +2,12 @@ package com.cinema.domain.model;
 
 import com.cinema.domain.enums.MovieGenre;
 import com.cinema.domain.enums.MovieRating;
+import lombok.Builder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Builder
 public record MovieSchedule(
         Long id,
         String title,
@@ -15,7 +17,7 @@ public record MovieSchedule(
         int runningTime,
         MovieGenre genre,
         String screenName,
-        LocalDateTime startAt,
-        LocalDateTime endAt
+        LocalDateTime startedAt,
+        LocalDateTime endedAt
 ) {
 }

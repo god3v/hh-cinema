@@ -31,7 +31,7 @@ public class MovieScheduleAdapter implements MovieSchedulePort {
         QScreenEntity screen = QScreenEntity.screenEntity;
 
         BooleanBuilder builder = new BooleanBuilder();
-        builder.and(schedule.startAt.after(LocalDateTime.now())) // 상영 시작 시간이 현재 시간보다 이후
+        builder.and(schedule.startedAt.after(LocalDateTime.now())) // 상영 시작 시간이 현재 시간보다 이후
                 .and(movie.releaseDate.before(LocalDate.now().plusDays(1))); // 개봉일이 오늘을 포함한 날짜보다 이전
 
         List<MovieScheduleProjection> fetch = queryFactory
@@ -45,18 +45,18 @@ public class MovieScheduleAdapter implements MovieSchedulePort {
                         movie.runningTime,
                         movie.genre,
                         screen.screenName,
-                        schedule.startAt,
-                        schedule.endAt
+                        schedule.startedAt,
+                        schedule.endedAt
                 ))
                 .from(schedule)
                 .innerJoin(movie).on(movie.id.eq(schedule.movie.id))
                 .innerJoin(screen).on(screen.id.eq(schedule.screen.id))
                 .where(builder)
-                .orderBy(movie.releaseDate.desc(), schedule.startAt.asc())
+                .orderBy(movie.releaseDate.desc(), schedule.startedAt.asc())
                 .fetch();
 
         return fetch.stream()
-                .map(MovieScheduleMapper::toDomain)
+                .map(MovieSchedulePersistenceMapper::toDomain)
                 .collect(Collectors.toList());
     }
 }
