@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface MovieSchedulePort {
 
-    List<MovieSchedule> findNowPlayingMovies(MovieSchedule movieSchedule);
+    List<MovieSchedule> findNowPlayingMovies(String genre, String title);
 }

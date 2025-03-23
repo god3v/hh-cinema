@@ -7,13 +7,12 @@ import com.cinema.application.port.in.MovieScheduleUseCase;
 import com.cinema.application.port.out.MovieSchedulePort;
 import com.cinema.domain.model.MovieSchedule;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MovieScheduleService implements MovieScheduleUseCase {
@@ -22,7 +21,7 @@ public class MovieScheduleService implements MovieScheduleUseCase {
 
     @Override
     public List<MovieScheduleQueryResult> getNowPlayingMovies(MovieScheduleQuery query) {
-        List<MovieSchedule> schedules = movieSchedulePort.findNowPlayingMovies(MovieScheduleApplicationMapper.toDomain(query));
+        List<MovieSchedule> schedules = movieSchedulePort.findNowPlayingMovies(query.genre(), query.title());
 
         Map<Long, MovieScheduleQueryResult> movieMap = new LinkedHashMap<>();
 
