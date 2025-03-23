@@ -6,14 +6,16 @@ import com.cinema.adapter.out.persistence.entity.QScreeningScheduleEntity;
 import com.cinema.adapter.out.persistence.mapper.MovieSchedulePersistenceMapper;
 import com.cinema.adapter.out.persistence.projection.MovieScheduleProjection;
 import com.cinema.application.port.out.MovieSchedulePort;
+import com.cinema.domain.enums.MovieGenre;
 import com.cinema.domain.model.MovieSchedule;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
