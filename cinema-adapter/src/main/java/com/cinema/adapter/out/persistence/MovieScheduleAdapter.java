@@ -25,7 +25,12 @@ public class MovieScheduleAdapter implements MovieSchedulePort {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<MovieSchedule> findNowPlayingMovies(MovieSchedule movieSchedule) {
+    @Cacheable(value = "playing_movies",
+            // movies:ALL / movies:ACTION / movies:ACTION:the / movies:ALL:the
+            key = "'movies:' + (#p0 != null ? #p0 : 'ALL') + (#p1 != null ? (':' + #p1) : '')",
+//            cacheManager = "caffeineCacheManager")
+            cacheManager = "redisCacheManager")
+    public List<MovieSchedule> findNowPlayingMovies(String genre, String title) {
         QMovieEntity movie = QMovieEntity.movieEntity;
         QScreeningScheduleEntity schedule = QScreeningScheduleEntity.screeningScheduleEntity;
         QScreenEntity screen = QScreenEntity.screenEntity;
