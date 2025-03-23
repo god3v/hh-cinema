@@ -7,7 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "screening_schedule")
+@Entity
+@Table(
+        name = "screening_schedule",
+        indexes = {
+                @Index(name = "idx_schedule_started_at", columnList = "startedAt")
+        }
+)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ScreeningScheduleEntity extends BaseEntity {

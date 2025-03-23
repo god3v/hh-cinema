@@ -24,7 +24,7 @@ public class MovieScheduleService implements MovieScheduleUseCase {
     public List<MovieScheduleQueryResult> getNowPlayingMovies(MovieScheduleQuery query) {
         List<MovieSchedule> schedules = movieSchedulePort.findNowPlayingMovies(MovieScheduleApplicationMapper.toDomain(query));
 
-        Map<Long, MovieScheduleQueryResult> movieMap = new HashMap<>();
+        Map<Long, MovieScheduleQueryResult> movieMap = new LinkedHashMap<>();
 
         for (MovieSchedule schedule : schedules) {
             Long movieId = schedule.id();

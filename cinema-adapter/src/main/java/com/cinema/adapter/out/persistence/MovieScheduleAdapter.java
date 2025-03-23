@@ -31,8 +31,19 @@ public class MovieScheduleAdapter implements MovieSchedulePort {
         QScreenEntity screen = QScreenEntity.screenEntity;
 
         BooleanBuilder builder = new BooleanBuilder();
-        builder.and(schedule.startedAt.after(LocalDateTime.now())) // 상영 시작 시간이 현재 시간보다 이후
-                .and(movie.releaseDate.before(LocalDate.now().plusDays(1))); // 개봉일이 오늘을 포함한 날짜보다 이전
+        builder.and(schedule.startedAt.after(LocalDateTime.now())); // 상영 시작 시간이 현재 시간보다 이후
+
+        if (title != null) {
+            builder.and(Expressions.booleanTemplate(
+                    "function('match_against', {0}, {1}) > 0",
+                    movie.title,
+                    title
+            ));
+//            builder.and(movie.title.like("%" + movieSchedule.title() + "%"));
+        }
+        if (genre != null) {
+            builder.and(movie.genre.eq(MovieGenre.valueOf(genre)));
+        }
 
         List<MovieScheduleProjection> fetch = queryFactory
                 .select(Projections.bean(
@@ -48,9 +59,9 @@ public class MovieScheduleAdapter implements MovieSchedulePort {
                         schedule.startedAt,
                         schedule.endedAt
                 ))
-                .from(schedule)
-                .innerJoin(movie).on(movie.id.eq(schedule.movie.id))
-                .innerJoin(screen).on(screen.id.eq(schedule.screen.id))
+                .from(movie)
+                .innerJoin(schedule).on(schedule.movie.eq(movie))
+                .innerJoin(screen).on(screen.eq(schedule.screen))
                 .where(builder)
                 .orderBy(movie.releaseDate.desc(), schedule.startedAt.asc())
                 .fetch();

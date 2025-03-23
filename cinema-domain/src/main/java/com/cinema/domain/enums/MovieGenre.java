@@ -15,12 +15,12 @@ public enum MovieGenre {
 
     private final String description;
 
-    public static MovieGenre fromDescription(String description) {
-        for (MovieGenre genre : MovieGenre.values()) {
-            if (genre.getDescription().equalsIgnoreCase(description)) {
-                return genre;
+    public static MovieGenre fromDescription(String genre) {
+        for (MovieGenre movieGenre : MovieGenre.values()) {
+            if (movieGenre.name().equalsIgnoreCase(genre)) {
+                return movieGenre;
             }
         }
-        throw new IllegalArgumentException("Unknown genre: " + description);
+        return null;
     }
 }

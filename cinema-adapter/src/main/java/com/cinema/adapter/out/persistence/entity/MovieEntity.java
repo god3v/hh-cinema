@@ -9,7 +9,14 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Entity(name = "movie")
+@Entity
+@Table(
+        name = "movie",
+        indexes = {
+                @Index(name = "idx_movie_release_date", columnList = "release_date"),
+                @Index(name = "idx_movie_genre", columnList = "genre")
+        }
+)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MovieEntity extends BaseEntity {

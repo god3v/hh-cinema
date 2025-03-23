@@ -5,7 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "screen")
+@Entity
+@Table(name = "screen")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ScreenEntity extends BaseEntity {
