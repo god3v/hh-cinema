@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Table(
         name = "movie",
         indexes = {
-                @Index(name = "idx_movie_release_date", columnList = "release_date"),
                 @Index(name = "idx_movie_genre", columnList = "genre")
         }
 )

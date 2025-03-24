@@ -28,9 +28,7 @@ public class MovieScheduleAdapter implements MovieSchedulePort {
 
     @Override
     @Cacheable(value = "playing_movies",
-            // movies:ALL / movies:ACTION / movies:ACTION:the / movies:ALL:the
             key = "'movies:' + (#p0 != null ? #p0 : 'ALL') + (#p1 != null ? (':' + #p1) : '')",
-//            cacheManager = "caffeineCacheManager")
             cacheManager = "redisCacheManager")
     public List<MovieSchedule> findNowPlayingMovies(String genre, String title) {
         QMovieEntity movie = QMovieEntity.movieEntity;
@@ -46,7 +44,6 @@ public class MovieScheduleAdapter implements MovieSchedulePort {
                     movie.title,
                     title
             ));
-//            builder.and(movie.title.like("%" + movieSchedule.title() + "%"));
         }
         if (genre != null) {
             builder.and(movie.genre.eq(MovieGenre.valueOf(genre)));
