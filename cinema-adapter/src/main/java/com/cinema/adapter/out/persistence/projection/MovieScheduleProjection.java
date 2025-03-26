@@ -23,6 +23,6 @@ public class MovieScheduleProjection {
     private int runningTime;
     private MovieGenre genre;
     private String screenName;
-    private LocalDateTime startAt;
-    private LocalDateTime endAt;
+    private LocalDateTime startedAt;
+    private LocalDateTime endedAt;
 }

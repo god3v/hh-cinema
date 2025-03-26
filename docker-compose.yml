@@ -13,11 +13,35 @@ services:
       - '3306:3306' # [host]:[container]
     volumes: # volumes 설정하지 않을 시 MySQL 컨테이너가 종료되면 컨테이너 내부의 데이터가 삭제됨
       - 'mysql_cinema_data:/var/lib/mysql' # 데이터 영구 저장
+      - './my.cnf:/etc/mysql/conf.d/my.cnf'
     command: [
       "--character-set-server=utf8mb4",           # MySQL 서버 기본 문자 집합을 utf8mb4로 설정
-      "--collation-server=utf8mb4_general_ci",    # MySQL 서버 기본 정렬 규칙을 utf8mb4_general_ci로 설정
-      "--default-time-zone=Asia/Seoul"            # MySQL 서버 기본 타임존을 KST(+09:00)로 설정
+      "--collation-server=utf8mb4_unicode_ci",    # MySQL 서버 기본 정렬 규칙을 utf8mb4_unicode_ci로 설정
+      "--default-time-zone=Asia/Seoul",           # MySQL 서버 기본 타임존을 KST(+09:00)로 설정
+      "--innodb_ft_min_token_size=1",             # InnoDB 풀텍스트 인덱스 최소 토큰 크기 설정
+      "--innodb_ft_enable_stopword=0"            # 불용어 파일 지정하지 않도록 설정
     ]
+
+  redis:
+    image: redis:latest
+    container_name: redis_cinema
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_cinema_data:/data
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    command: > 
+      redis-server 
+      --appendonly yes 
+      --requirepass ${REDIS_PASSWORD} 
+      --port 6379
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+      --timeout 60
 
 volumes:
   mysql_cinema_data:
+  redis-data:
+    driver: local

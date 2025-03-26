@@ -9,7 +9,13 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Entity(name = "movie")
+@Entity
+@Table(
+        name = "movie",
+        indexes = {
+                @Index(name = "idx_movie_genre", columnList = "genre")
+        }
+)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MovieEntity extends BaseEntity {
@@ -22,9 +28,11 @@ public class MovieEntity extends BaseEntity {
     @Column(nullable = false)
     private String title; // 영화 제목
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private MovieRating movieRating; // 영상물 등급
 
+    @Column(nullable = false)
     private LocalDate releaseDate; // 개봉일
 
     private String thumbnailUrl; // 썸네일 이미지 URL
@@ -32,6 +40,7 @@ public class MovieEntity extends BaseEntity {
     @Column(nullable = false)
     private int runningTime; // 러닝 타임(분)
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private MovieGenre genre; // 영화 장르
 }

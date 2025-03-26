@@ -5,7 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "screen_seat")
+@Entity
+@Table(name = "screen_seat")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ScreenSeatEntity extends BaseEntity {
@@ -16,11 +17,11 @@ public class ScreenSeatEntity extends BaseEntity {
     private Long id; // 상영관 좌석 ID
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "screen_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "screen_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
     private ScreenEntity screen; // 상영관 ID
 
     @Column(name = "seat_row", nullable = false)
-    private int row; // 좌석 위치 행
+    private char row; // 좌석 위치 행
 
     @Column(name = "seat_col", nullable = false)
     private int col; // 좌석 위치 열
