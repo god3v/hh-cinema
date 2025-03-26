@@ -15,6 +15,9 @@ CREATE TABLE `movie` (
   PRIMARY KEY (`movie_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE FULLTEXT INDEX idx_movie_title ON movie(title);
+CREATE INDEX idx_movie_genre_release_date ON movie (genre, release_date DESC);
+
 -- cinema_db.screen definition
 
 CREATE TABLE `screen` (
@@ -32,7 +35,7 @@ CREATE TABLE `screen` (
 CREATE TABLE `screen_seat` (
   `screen_seat_id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `screen_id` bigint unsigned NOT NULL,
-  `seat_row` int unsigned NOT NULL,
+  `seat_row` char NOT NULL,
   `seat_col` int unsigned NOT NULL,
   `created_by` bigint unsigned NOT NULL,
   `created_at` timestamp NOT NULL,
@@ -60,7 +63,7 @@ CREATE TABLE `screening_schedule` (
   PRIMARY KEY (`screening_schedule_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=501 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE INDEX idx_schedule_started_at ON screening_schedule (started_at);
+CREATE INDEX idx_schedule_movie_id ON screening_schedule (movie_id);
 
 -- cinema_db.ticket_reservation definition
 

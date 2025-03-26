@@ -14,13 +14,4 @@ public enum MovieGenre {
     ROMANCE("로맨스");
 
     private final String description;
-
-    public static MovieGenre fromDescription(String genre) {
-        for (MovieGenre movieGenre : MovieGenre.values()) {
-            if (movieGenre.name().equalsIgnoreCase(genre)) {
-                return movieGenre;
-            }
-        }
-        return null;
-    }
 }

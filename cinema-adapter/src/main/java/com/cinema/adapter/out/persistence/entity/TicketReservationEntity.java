@@ -5,7 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "ticket_reservation")
+@Entity
+@Table(name = "ticket_reservation")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TicketReservationEntity extends BaseEntity {
