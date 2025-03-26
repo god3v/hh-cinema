@@ -4,7 +4,7 @@ import com.cinema.adapter.in.web.validation.EnumValue;
 import com.cinema.domain.enums.MovieGenre;
 import jakarta.validation.constraints.Size;
 
-public record MovieScheduleRequest(
+public record GetNowPlayingMovieRequest(
         @Size(max = 30, message = "{validation.title.size}")
         String title,
         @EnumValue(enumClass = MovieGenre.class, message = "{validation.genre.invalid}")

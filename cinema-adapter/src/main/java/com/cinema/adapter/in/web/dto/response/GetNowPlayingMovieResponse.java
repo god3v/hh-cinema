@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
-public record MovieScheduleResponse(
+public record GetNowPlayingMovieResponse(
         Long movieId,
         String title,
         String rating,

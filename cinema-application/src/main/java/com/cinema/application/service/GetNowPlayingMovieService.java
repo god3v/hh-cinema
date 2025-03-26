@@ -1,8 +1,8 @@
 package com.cinema.application.service;
 
-import com.cinema.application.dto.MovieScheduleQuery;
-import com.cinema.application.dto.MovieScheduleQueryResult;
-import com.cinema.application.port.in.MovieScheduleUseCase;
+import com.cinema.application.dto.MovieSearchQuery;
+import com.cinema.application.dto.MovieSearchResult;
+import com.cinema.application.port.in.GetNowPlayingMovieUseCase;
 import com.cinema.application.port.out.MovieSchedulePort;
 import com.cinema.domain.model.MovieSchedule;
 import lombok.RequiredArgsConstructor;
@@ -17,22 +17,22 @@ import java.util.Map;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class MovieScheduleService implements MovieScheduleUseCase {
+public class GetNowPlayingMovieService implements GetNowPlayingMovieUseCase {
 
     private final MovieSchedulePort movieSchedulePort;
 
     @Override
-    public List<MovieScheduleQueryResult> getNowPlayingMovies(MovieScheduleQuery query) {
+    public List<MovieSearchResult> getNowPlayingMovies(MovieSearchQuery query) {
         List<MovieSchedule> schedules = movieSchedulePort.findNowPlayingMovies(query.genre(), query.title());
 
-        Map<Long, MovieScheduleQueryResult> movieMap = new LinkedHashMap<>();
+        Map<Long, MovieSearchResult> movieMap = new LinkedHashMap<>();
 
         for (MovieSchedule schedule : schedules) {
-            MovieScheduleQueryResult movieSchedule = movieMap.computeIfAbsent(schedule.id(), id ->
-                    MovieScheduleQueryResult.of(schedule));
+            MovieSearchResult movieSchedule = movieMap.computeIfAbsent(schedule.id(), id ->
+                    MovieSearchResult.of(schedule));
 
             movieSchedule.schedules()
-                    .add(MovieScheduleQueryResult.Schedule.builder()
+                    .add(MovieSearchResult.Schedule.builder()
                             .screenName(schedule.screenName())
                             .startedAt(schedule.startedAt())
                             .endedAt(schedule.endedAt())
