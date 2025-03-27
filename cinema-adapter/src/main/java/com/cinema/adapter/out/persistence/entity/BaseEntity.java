@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class BaseEntity {
 
     @Column(updatable = false, nullable = false)
-    private Long createdBy; // 작성자 ID
+    protected Long createdBy; // 작성자 ID
 
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
