@@ -1,5 +1,8 @@
 package com.cinema.adapter.out.persistence.entity;
 
+import com.cinema.domain.model.Movie;
+import com.cinema.domain.model.Screen;
+import com.cinema.domain.model.ScreeningSchedule;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -37,4 +40,24 @@ public class ScreeningScheduleEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "screen_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
     private ScreenEntity screen; // 상영관 ID
+
+    public ScreeningScheduleEntity(Long id) {
+        this.id = id;
+    }
+
+    public ScreeningSchedule of() {
+        return ScreeningSchedule.builder()
+                .id(this.id)
+                .startAt(this.startedAt)
+                .endAt(this.endedAt)
+                .movie(Movie.builder()
+                        .id(movie.getId())
+                        .title(movie.getTitle())
+                        .build())
+                .screen(Screen.builder()
+                        .id(screen.getId())
+                        .name(screen.getScreenName())
+                        .build())
+                .build();
+    }
 }

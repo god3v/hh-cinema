@@ -3,8 +3,6 @@ package com.cinema.adapter.out.persistence;
 import com.cinema.adapter.out.persistence.entity.QMovieEntity;
 import com.cinema.adapter.out.persistence.entity.QScreenEntity;
 import com.cinema.adapter.out.persistence.entity.QScreeningScheduleEntity;
-import com.cinema.adapter.out.persistence.mapper.MovieSchedulePersistenceMapper;
-import com.cinema.adapter.out.persistence.projection.MovieScheduleProjection;
 import com.cinema.application.port.out.MovieSchedulePort;
 import com.cinema.domain.enums.MovieGenre;
 import com.cinema.domain.model.MovieSchedule;
@@ -18,7 +16,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -49,9 +46,9 @@ public class MovieScheduleAdapter implements MovieSchedulePort {
             builder.and(movie.genre.eq(MovieGenre.valueOf(genre)));
         }
 
-        List<MovieScheduleProjection> fetch = queryFactory
-                .select(Projections.bean(
-                        MovieScheduleProjection.class,
+        return queryFactory
+                .select(Projections.constructor(
+                        MovieSchedule.class,
                         movie.id,
                         movie.title,
                         movie.movieRating,
@@ -69,9 +66,5 @@ public class MovieScheduleAdapter implements MovieSchedulePort {
                 .where(builder)
                 .orderBy(movie.releaseDate.desc(), schedule.startedAt.asc())
                 .fetch();
-
-        return fetch.stream()
-                .map(MovieSchedulePersistenceMapper::toDomain)
-                .collect(Collectors.toList());
     }
 }

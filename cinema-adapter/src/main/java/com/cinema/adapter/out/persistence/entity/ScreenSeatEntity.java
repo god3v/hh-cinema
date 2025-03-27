@@ -1,5 +1,6 @@
 package com.cinema.adapter.out.persistence.entity;
 
+import com.cinema.domain.model.ScreenSeat;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -25,4 +26,8 @@ public class ScreenSeatEntity extends BaseEntity {
 
     @Column(name = "seat_col", nullable = false)
     private int col; // 좌석 위치 열
+
+    public ScreenSeatEntity(Long id) {
+        this.id = id;
+    }
 }
