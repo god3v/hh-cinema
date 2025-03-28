@@ -6,6 +6,7 @@ import com.cinema.application.port.out.ScreenSeatPort;
 import com.cinema.domain.model.ScreenSeat;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.LockModeType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -35,6 +36,7 @@ public class ScreenSeatAdapter implements ScreenSeatPort {
                         .and(reservation.screeningSchedule.id.eq(scheduleId)))
                 .where(seat.id.in(seatIds)
                         .and(reservation.id.isNull()))
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                 .fetch();
     }
 }
