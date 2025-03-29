@@ -1,4 +1,4 @@
-package com.cinema.domain.exception;
+package com.cinema.common.exception;
 
 public enum ErrorCode {
     BUSINESS_ERROR,
