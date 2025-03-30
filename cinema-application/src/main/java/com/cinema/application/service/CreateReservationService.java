@@ -20,7 +20,8 @@ public class CreateReservationService implements CreateReservationUseCase {
     private final TicketReservationPort reservationPort;
 
     @Override
-    @Transactional
+//    @Transactional
+    @DistributedLock(key = "#command.scheduleId")
     public List<CreateReservationResult> createReservation(CreateReservationCommand command) {
         TicketReservation reservation = ReservationMapper.toDomain(command);
 
