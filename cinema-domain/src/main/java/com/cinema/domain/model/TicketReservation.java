@@ -1,4 +1,4 @@
-package com.cinema.common.model;
+package com.cinema.domain.model;
 
 import lombok.Builder;
 

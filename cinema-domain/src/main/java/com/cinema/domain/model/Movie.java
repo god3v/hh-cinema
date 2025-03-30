@@ -1,7 +1,7 @@
-package com.cinema.common.model;
+package com.cinema.domain.model;
 
-import com.cinema.common.enums.MovieGenre;
-import com.cinema.common.enums.MovieRating;
+import com.cinema.domain.enums.MovieGenre;
+import com.cinema.domain.enums.MovieRating;
 import lombok.Builder;
 
 import java.time.LocalDate;

@@ -1,7 +1,7 @@
 package com.cinema.adapter.in.web.controller;
 
 import com.cinema.adapter.in.web.dto.request.CreateReservationRequest;
-import com.cinema.domain.exception.CoreException;
+import com.cinema.common.exception.CoreException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

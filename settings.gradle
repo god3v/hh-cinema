@@ -2,4 +2,5 @@ rootProject.name = 'cinema'
 include 'cinema-domain'
 include 'cinema-application'
 include 'cinema-adapter'
+include 'cinema-common'
 

@@ -1,6 +1,5 @@
 package com.cinema.adapter.out.persistence.entity;
 
-import com.cinema.domain.model.ScreenSeat;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
