@@ -1,4 +1,4 @@
-package com.cinema.common.exception;
+package com.cinema.domain.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,8 @@ public enum ErrorType {
     HTTP_MESSAGE_NOT_READABLE(ErrorCode.CLIENT_ERROR, "exception.client_error", LogLevel.WARN),
     INVALID_SEAT_SELECTION(ErrorCode.CLIENT_ERROR, "exception.seat.invalid.selection", LogLevel.WARN),
     SEAT_RESERVATION_EXCEEDED(ErrorCode.CLIENT_ERROR, "exception.seat.reservation_exceeded", LogLevel.WARN),
-    SEATS_NOT_CONTINUOUS(ErrorCode.CLIENT_ERROR, "exception.seat.not_continuous", LogLevel.WARN);
+    SEATS_NOT_CONTINUOUS(ErrorCode.CLIENT_ERROR, "exception.seat.not_continuous", LogLevel.WARN),
+    EVENT_PUBLISH_FAILED(ErrorCode.SERVER_ERROR, "exception.event.publish_failed", LogLevel.WARN);
 
     private final ErrorCode errorCode;
     private final String messageKey;

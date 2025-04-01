@@ -2,8 +2,8 @@ package com.cinema.application.service;
 
 import com.cinema.application.port.out.ScreenSeatPort;
 import com.cinema.application.port.out.TicketReservationPort;
-import com.cinema.common.exception.CoreException;
-import com.cinema.common.exception.ErrorType;
+import com.cinema.domain.exception.CoreException;
+import com.cinema.domain.exception.ErrorType;
 import com.cinema.domain.model.ScreenSeat;
 import com.cinema.domain.model.TicketReservation;
 import lombok.RequiredArgsConstructor;

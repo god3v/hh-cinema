@@ -1,8 +1,8 @@
 package com.cinema.adapter.in.web.exception;
 
 import com.cinema.adapter.in.web.dto.response.ErrorResponse;
-import com.cinema.common.exception.CoreException;
-import com.cinema.common.exception.ErrorType;
+import com.cinema.domain.exception.CoreException;
+import com.cinema.domain.exception.ErrorType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.logging.LogLevel;

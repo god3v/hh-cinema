@@ -1,8 +1,9 @@
-package com.cinema.common.exception;
+package com.cinema.domain.exception;
 
 public enum ErrorCode {
     BUSINESS_ERROR,
     NOT_FOUND,
     DB_ERROR,
     CLIENT_ERROR,
+    SERVER_ERROR,
 }

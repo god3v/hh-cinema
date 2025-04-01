@@ -1,4 +1,4 @@
-package com.cinema.common.exception;
+package com.cinema.domain.exception;
 
 import lombok.Getter;
 
