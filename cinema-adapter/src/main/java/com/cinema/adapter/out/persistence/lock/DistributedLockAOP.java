@@ -1,4 +1,4 @@
-package com.cinema.common.aop;
+package com.cinema.adapter.out.persistence.lock;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DistributedLock {
+public @interface DistributedLockAOP {
 
     String key();
 

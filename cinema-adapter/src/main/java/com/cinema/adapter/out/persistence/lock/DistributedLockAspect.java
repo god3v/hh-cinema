@@ -1,4 +1,4 @@
-package com.cinema.common.aop;
+package com.cinema.adapter.out.persistence.lock;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,16 +24,16 @@ public class DistributedLockAspect {
     private final AopForTransaction aopForTransaction;
 
     @Around("@annotation(distributedLock)")
-    public Object lock(final ProceedingJoinPoint joinPoint, DistributedLock distributedLock) throws Throwable {
+    public Object lock(final ProceedingJoinPoint joinPoint, DistributedLockAOP distributedLockAOP) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
 
 //        String key = REDISSON_LOCK_PREFIX + CustomSpringELParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.key());
-        String key = REDISSON_LOCK_PREFIX + distributedLock.key();
+        String key = REDISSON_LOCK_PREFIX + distributedLockAOP.key();
         RLock rLock = redissonClient.getLock(key);
 
         try {
-            boolean available = rLock.tryLock(distributedLock.waitTime(), distributedLock.leaseTime(), distributedLock.timeUnit());
+            boolean available = rLock.tryLock(distributedLockAOP.waitTime(), distributedLockAOP.leaseTime(), distributedLockAOP.timeUnit());
             if (!available) {
                 return false;
             }

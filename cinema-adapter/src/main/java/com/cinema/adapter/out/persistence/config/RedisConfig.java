@@ -1,4 +1,4 @@
-package com.cinema.common.aop;
+package com.cinema.adapter.out.persistence.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

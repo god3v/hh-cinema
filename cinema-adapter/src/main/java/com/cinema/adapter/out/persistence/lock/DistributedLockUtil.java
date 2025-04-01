@@ -1,5 +1,6 @@
-package com.cinema.common.aop;
+package com.cinema.adapter.out.persistence.lock;
 
+import com.cinema.application.port.out.DistributedLock;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 @Component
-public class DistributedLockUtil {
+public class DistributedLockUtil implements DistributedLock {
     private final RedissonClient redissonClient;
 
     public DistributedLockUtil(RedissonClient redissonClient) {
@@ -18,6 +19,7 @@ public class DistributedLockUtil {
     /**
      * 락을 획득한 후 안전하게 실행하는 함수형 메서드
      */
+    @Override
     public <T> T executeWithLock(String key, long waitTime, long leaseTime, Supplier<T> task) {
         RLock lock = redissonClient.getLock(key);
 
