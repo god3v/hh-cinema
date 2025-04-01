@@ -1,4 +1,4 @@
-package com.cinema.adapter.out.persistence.lock;
+package com.cinema.application.service;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -14,7 +14,7 @@ public @interface DistributedLockAOP {
 
     TimeUnit timeUnit() default TimeUnit.SECONDS;
 
-    long waitTime() default 5L;
+    long waitTime() default 3L;
 
     long leaseTime() default 3L;
 }

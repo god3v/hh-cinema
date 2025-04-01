@@ -45,6 +45,8 @@ public class ReservationControllerTest {
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
         CountDownLatch latch = new CountDownLatch(threadCount);
 
+        long startTime = System.currentTimeMillis(); // 시작 시간 측정
+
         for (int i = 0; i < threadCount; i++) {
             final int taskId = i;
 
@@ -62,6 +64,13 @@ public class ReservationControllerTest {
 
         latch.await(); // 카운트 0까지 기다림
         executor.shutdown(); // pool 종료
+
+        long endTime = System.currentTimeMillis(); // 종료 시간 측정
+        long elapsedTime = endTime - startTime;
+
+        System.out.println("🔹 실행 시간(ms) : " + elapsedTime);
+        System.out.println("✅ 예약 성공 횟수 : " + successCount.get());
+        System.out.println("❌ 예약 실패 횟수 : " + exceptionCount.get());
 
         assertEquals(1, successCount.get());
         assertEquals(TOTAL_RESERVATION - 1, exceptionCount.get());

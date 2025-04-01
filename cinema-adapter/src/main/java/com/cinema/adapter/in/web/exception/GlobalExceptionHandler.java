@@ -64,6 +64,9 @@ public class GlobalExceptionHandler {
             case CLIENT_ERROR -> {
                 return HttpStatus.BAD_REQUEST;
             }
+            case CONFLICT -> {
+                return HttpStatus.CONFLICT;
+            }
             default -> {
                 return HttpStatus.OK;
             }

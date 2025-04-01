@@ -27,8 +27,8 @@ public class CreateReservationService implements CreateReservationUseCase {
     public List<CreateReservationResult> createReservation(CreateReservationCommand command) {
         TicketReservation reservation = ReservationMapper.toDomain(command);
 
-        String lockKey = "lock:" + command.scheduleId();
-        return lock.executeWithLock(lockKey, 5, 3, () -> {
+        String lockKey = String.valueOf(command.scheduleId());
+        return lock.executeWithLock(lockKey, 3, 3, () -> {
             reservationValidator.validate(reservation);
 
             List<Long> reservedIds = reservationPort.saveReservations(reservation);

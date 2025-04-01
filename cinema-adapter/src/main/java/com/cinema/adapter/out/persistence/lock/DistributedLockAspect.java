@@ -1,5 +1,6 @@
 package com.cinema.adapter.out.persistence.lock;
 
+import com.cinema.application.service.DistributedLockAOP;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

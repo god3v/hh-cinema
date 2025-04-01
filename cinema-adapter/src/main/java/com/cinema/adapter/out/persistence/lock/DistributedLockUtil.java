@@ -1,6 +1,9 @@
 package com.cinema.adapter.out.persistence.lock;
 
 import com.cinema.application.port.out.DistributedLock;
+import com.cinema.domain.exception.CoreException;
+import com.cinema.domain.exception.ErrorType;
+import lombok.RequiredArgsConstructor;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
@@ -9,26 +12,24 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 @Component
+@RequiredArgsConstructor
 public class DistributedLockUtil implements DistributedLock {
-    private final RedissonClient redissonClient;
+    private static final String REDISSON_LOCK_PREFIX = "LOCK:";
 
-    public DistributedLockUtil(RedissonClient redissonClient) {
-        this.redissonClient = redissonClient;
-    }
+    private final RedissonClient redissonClient;
 
     /**
      * 락을 획득한 후 안전하게 실행하는 함수형 메서드
      */
     @Override
     public <T> T executeWithLock(String key, long waitTime, long leaseTime, Supplier<T> task) {
-        RLock lock = redissonClient.getLock(key);
+        RLock lock = redissonClient.getLock(REDISSON_LOCK_PREFIX + key);
 
         try {
             if (!lock.tryLock(waitTime, leaseTime, TimeUnit.SECONDS)) {
-                throw new IllegalStateException("동일 좌석이 이미 예약 중입니다. 나중에 다시 시도해 주세요.");
+                throw new CoreException(ErrorType.LOCK_ACQUISITION_FAILED, "Lock key: " + lock.getName());
             }
-
-            return task.get();  // 함수 실행
+            return task.get();
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
