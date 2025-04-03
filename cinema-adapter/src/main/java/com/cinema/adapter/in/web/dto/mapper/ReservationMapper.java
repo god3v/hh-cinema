@@ -1,6 +1,6 @@
 package com.cinema.adapter.in.web.dto.mapper;
 
-import com.cinema.adapter.in.web.dto.request.CreateReservationRequest;
+import com.cinema.adapter.in.web.dto.request.ReservationRequest;
 import com.cinema.adapter.in.web.dto.response.ReservationResponse;
 import com.cinema.application.dto.CreateReservationCommand;
 import com.cinema.application.dto.CreateReservationResult;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ReservationMapper {
-    public static CreateReservationCommand toCommand(CreateReservationRequest request) {
+    public static CreateReservationCommand toCommand(ReservationRequest request) {
         return new CreateReservationCommand(
                 request.userId(),
                 request.scheduleId(),

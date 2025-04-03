@@ -1,8 +1,8 @@
 package com.cinema.adapter.in.web.controller;
 
 import com.cinema.adapter.in.web.dto.mapper.MovieSearchMapper;
-import com.cinema.adapter.in.web.dto.request.GetNowPlayingMovieRequest;
-import com.cinema.adapter.in.web.dto.response.GetNowPlayingMovieResponse;
+import com.cinema.adapter.in.web.dto.request.NowPlayingMovieRequest;
+import com.cinema.adapter.in.web.dto.response.NowPlayingMovieResponse;
 import com.cinema.application.dto.MovieSearchResult;
 import com.cinema.application.port.in.GetNowPlayingMovieUseCase;
 import jakarta.validation.Valid;
@@ -26,7 +26,7 @@ public class MovieController {
      * 상영 중인 모든 영화 조회 API
      */
     @GetMapping
-    public ResponseEntity<List<GetNowPlayingMovieResponse>> getNowPlayingMovies(@Valid @ModelAttribute GetNowPlayingMovieRequest request) {
+    public ResponseEntity<List<NowPlayingMovieResponse>> getNowPlayingMovies(@Valid @ModelAttribute NowPlayingMovieRequest request) {
         List<MovieSearchResult> result = getNowPlayingMovieUseCase.getNowPlayingMovies(MovieSearchMapper.toQuery(request));
         return ResponseEntity.ok(MovieSearchMapper.toResponseList(result));
     }

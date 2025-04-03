@@ -1,4 +1,4 @@
-package com.cinema.application.service;
+package com.cinema.application.validator;
 
 import com.cinema.application.port.out.ScreenSeatPort;
 import com.cinema.application.port.out.TicketReservationPort;
@@ -22,7 +22,7 @@ public class ReservationValidator {
     private final TicketReservationPort reservationPort;
 
     public void validate(TicketReservation reservation) {
-        validate(reservation, getSeats(reservation), getReservedSeatIds(reservation));
+        validate(reservation, getNotReservedSeats(reservation), getReservedSeatIds(reservation));
     }
 
     void validate(TicketReservation reservation,
@@ -43,7 +43,7 @@ public class ReservationValidator {
         }
     }
 
-    private List<ScreenSeat> getSeats(TicketReservation reservation) {
+    private List<ScreenSeat> getNotReservedSeats(TicketReservation reservation) {
         return seatPort.findSeatsNotReservedByScheduleIdAndSeatIds(reservation.schedule().id(), reservation.seats().stream().map(ScreenSeat::id).toList());
     }
 

@@ -8,7 +8,7 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record CreateReservationRequest(
+public record ReservationRequest(
         @NotNull(message = "{validation.userId.notnull}")
         @Positive(message = "{validation.id.positive")
         Long userId,

@@ -1,6 +1,6 @@
 package com.cinema.adapter.in.web.controller;
 
-import com.cinema.adapter.in.web.dto.request.CreateReservationRequest;
+import com.cinema.adapter.in.web.dto.request.ReservationRequest;
 import com.cinema.domain.exception.CoreException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +25,14 @@ public class ReservationControllerTest {
 
     @Test
     public void 동시성_예약_테스트() throws InterruptedException {
-        List<CreateReservationRequest> reservationRequests = new ArrayList<>();
+        List<ReservationRequest> reservationRequests = new ArrayList<>();
         AtomicInteger successCount = new AtomicInteger(0);
         AtomicInteger exceptionCount = new AtomicInteger(0);
 
 
         for (int i=0; i < TOTAL_RESERVATION; i++) {
             reservationRequests.add(
-                    CreateReservationRequest.builder()
+                    ReservationRequest.builder()
                             .scheduleId(1L)
                             .seatIds(List.of(1L, 2L, 3L, 4L, 5L))
                             .userId((long) i)

@@ -40,12 +40,13 @@ public class DistributedLockAspect {
             }
             return aopForTransaction.proceed(joinPoint);
         } catch (InterruptedException e) {
+            log.warn("Redisson Lock Interrupted serviceName: {}, key: {}", method.getName(), key);
             throw new InterruptedException();
         } finally {
             try {
                 rLock.unlock();
             } catch (IllegalMonitorStateException e) {
-                log.info("Redisson Lock Already UnLock serviceName: {}, key: {}", method.getName(), key);
+                log.warn("Redisson Lock Already UnLock serviceName: {}, key: {}", method.getName(), key);
             }
         }
     }
