@@ -1,4 +1,4 @@
-package com.cinema.adapter.out.persistence.lock;
+package com.cinema.adapter.out.persistence.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;

@@ -1,5 +1,6 @@
 package com.cinema.adapter.in.web.validation;
 
+import com.cinema.adapter.in.web.annotation.EnumValue;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
