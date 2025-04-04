@@ -24,6 +24,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'com.github.ben-manes.caffeine:caffeine'
 
+    // rate limiting
+    implementation("com.google.guava:guava:33.4.6-jre")
+
     // spring boot redis
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.redisson:redisson:3.45.1'
@@ -55,4 +58,8 @@ sourceSets {
 }
 clean {
     delete file(generated)
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << "-parameters"
 }

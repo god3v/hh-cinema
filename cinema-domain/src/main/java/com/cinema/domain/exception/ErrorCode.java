@@ -7,4 +7,5 @@ public enum ErrorCode {
     CLIENT_ERROR,
     SERVER_ERROR,
     LOCK_ACQUISITION_FAILED,
+    TOO_MANY_REQUESTS,
 }
