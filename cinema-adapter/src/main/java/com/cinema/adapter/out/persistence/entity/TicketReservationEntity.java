@@ -27,4 +27,13 @@ public class TicketReservationEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = false)
     private UserEntity user; // 회원 ID
+
+    public static TicketReservationEntity create(ScreeningScheduleEntity schedule, ScreenSeatEntity seat, UserEntity user) {
+        TicketReservationEntity entity = new TicketReservationEntity();
+        entity.screeningSchedule = schedule;
+        entity.screenSeat = seat;
+        entity.user = user;
+        entity.createdBy = user.getId();
+        return entity;
+    }
 }

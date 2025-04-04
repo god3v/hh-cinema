@@ -2,9 +2,11 @@ package com.cinema.domain.model;
 
 import com.cinema.domain.enums.MovieGenre;
 import com.cinema.domain.enums.MovieRating;
+import lombok.Builder;
 
 import java.time.LocalDate;
 
+@Builder
 public record Movie(
         Long id, // 영화 ID
         String title, // 영화 제목

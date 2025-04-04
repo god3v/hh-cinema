@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Builder
-public record MovieScheduleQueryResult(
+public record MovieSearchResult(
         Long movieId,
         String title,
         String rating,
@@ -20,8 +20,8 @@ public record MovieScheduleQueryResult(
         List<Schedule> schedules
 ) {
 
-    public static MovieScheduleQueryResult of(MovieSchedule schedule) {
-        return new MovieScheduleQueryResult(
+    public static MovieSearchResult of(MovieSchedule schedule) {
+        return new MovieSearchResult(
                 schedule.id(),
                 schedule.title(),
                 schedule.movieRating().name(),

@@ -25,4 +25,8 @@ public class ScreenSeatEntity extends BaseEntity {
 
     @Column(name = "seat_col", nullable = false)
     private int col; // 좌석 위치 열
+
+    public ScreenSeatEntity(Long id) {
+        this.id = id;
+    }
 }
