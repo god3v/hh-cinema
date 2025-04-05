@@ -1,6 +1,6 @@
 package com.cinema.adapter.in.web.config;
 
-import com.cinema.adapter.in.web.RateLimitingInterceptor;
+import com.cinema.adapter.in.web.interceptor.RateLimitingInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
-@Component
+//@Component
 @RequiredArgsConstructor
-public class GuavaReservationRateRateLimiterAdapter implements ReservationRateLimiterPort {
+public class GuavaReservationRateLimiterAdapter implements ReservationRateLimiterPort {
 
     private final Cache<Object, Object> cache = CacheBuilder.newBuilder()
             .expireAfterWrite(5, TimeUnit.MINUTES)

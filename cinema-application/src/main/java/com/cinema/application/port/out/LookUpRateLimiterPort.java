@@ -1,7 +1,7 @@
 package com.cinema.application.port.out;
 
-public interface RateLimiterPort {
+public interface LookUpRateLimiterPort {
     boolean isBlocked(String ip);
-    void markBlocked(String ip);
     boolean tryAcquire(String ip);
+    void markBlocked(String ip);
 }
