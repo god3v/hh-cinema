@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco'
 }
 
 group = 'com.cinema'
@@ -17,11 +18,85 @@ repositories {
 	mavenCentral()
 }
 
+jacoco {
+	toolVersion = "0.8.10"
+	reportsDirectory = layout.buildDirectory.dir('jacocoReport')
+}
+
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'java-library'
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'jacoco'
+
+	jacocoTestReport {
+		dependsOn test
+		reports {
+			xml.required = true
+			csv.required = false
+			html.required = true
+		}
+		reports.html.outputLocation = file("${buildDir}/jacocoHtml")
+
+		def Qdomains = []
+		for (qPattern in '**/QA'..'**/QZ') { // qPattern = '**/QA', '**/QB', ... '*.QZ'
+			Qdomains.add(qPattern + '*')
+		}
+		afterEvaluate {
+			classDirectories.setFrom(files(classDirectories.files.collect {
+				fileTree(dir: it, exclude: [
+						'**/dto/**',
+						'**/event/**',
+						'**/*InitData*',
+						'**/*Application*',
+						'**/exception/**',
+						'**/service/alarm/**',
+						'**/aop/**',
+						'**/config/**',
+						'**/MemberRole*'
+				] + Qdomains)
+			}))
+		}
+		finalizedBy 'jacocoTestCoverageVerification'
+	}
+
+	jacocoTestCoverageVerification {
+		def Qdomains = []
+		for (qPattern in '*.QA'..'*.QZ') { // qPattern = '*.QA', '*.QB', ... '*.QZ'
+			Qdomains.add(qPattern + '*')
+		}
+		violationRules {
+			rule {
+				enabled = true;
+				element = 'CLASS'
+
+				limit {
+					counter = 'LINE'
+					value = 'COVEREDRATIO'
+					minimum = 0.80
+				}
+
+				limit {
+					counter = 'BRANCH'
+					value = 'COVEREDRATIO'
+					minimum = 0.80
+				}
+
+				excludes = [
+						'**.dto.**',
+						'**.event.**',
+						'**.*InitData*',
+						'**.*Application*',
+						'**.exception.**',
+						'**.service.alarm.**',
+						'**.aop.**',
+						'**.config.**',
+						'**.MemberRole*'
+				] + Qdomains
+			}
+		}
+	}
 
 	dependencies {
 		annotationProcessor 'org.projectlombok:lombok'
@@ -33,7 +108,7 @@ subprojects {
 	}
 
 	configurations {
-		compileOny {
+		compileOnly {
 			extendsFrom annotationProcessor
 		}
 	}
@@ -44,6 +119,7 @@ subprojects {
 
 	test {
 		useJUnitPlatform()
+		finalizedBy jacocoTestReport
 	}
 }
 
@@ -51,4 +127,26 @@ subprojects {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task jacocoRootReport(type: JacocoReport) {
+	dependsOn subprojects.test
+
+	subprojects.each { proj ->
+		def reportTask = proj.tasks.findByName("jacocoTestReport")
+		if (reportTask) {
+			executionData reportTask.executionData
+			sourceDirectories.setFrom files(proj.sourceSets.main.allSource.srcDirs)
+			classDirectories.setFrom files(proj.sourceSets.main.output)
+		}
+	}
+
+	reports {
+		html.required = true
+		xml.required = true
+	}
+
+	doFirst {
+		executionData = files(executionData.findAll { it.exists() })
+	}
 }

@@ -1,4 +1,4 @@
-package com.cinema.adapter.out.persistence.lock;
+package com.cinema.adapter.out.persistence;
 
 import com.cinema.application.port.out.DistributedLock;
 import com.cinema.domain.exception.CoreException;
@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class DistributedLockImpl implements DistributedLock {
+public class DistributedLockAdapter implements DistributedLock {
     private static final String REDISSON_LOCK_PREFIX = "LOCK:";
 
     private final RedissonClient redissonClient;

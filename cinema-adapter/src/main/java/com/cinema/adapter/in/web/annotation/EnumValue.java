@@ -1,5 +1,6 @@
-package com.cinema.adapter.in.web.validation;
+package com.cinema.adapter.in.web.annotation;
 
+import com.cinema.adapter.in.web.validation.EnumValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -13,15 +14,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EnumValue {
 
-    // 유효하지 않은 값일 경우 나오는 메시지
     String message() default "Invalid value";
-
-    // 검사 대상의 enum 클래스 지정
     Class<?>[] groups() default {};
-
-    // 페이로드
     Class<? extends Payload>[] payload() default {};
-
-    // 유효성 검사할 Enum 클래스 지정
     Class<? extends Enum<?>> enumClass();
 }

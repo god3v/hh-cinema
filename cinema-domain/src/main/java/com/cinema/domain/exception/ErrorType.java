@@ -15,7 +15,9 @@ public enum ErrorType {
     SEAT_RESERVATION_EXCEEDED(ErrorCode.CLIENT_ERROR, "exception.seat.reservation_exceeded", LogLevel.WARN),
     SEATS_NOT_CONTINUOUS(ErrorCode.CLIENT_ERROR, "exception.seat.not_continuous", LogLevel.WARN),
     EVENT_PUBLISH_FAILED(ErrorCode.SERVER_ERROR, "exception.event.publish_failed", LogLevel.ERROR),
-    LOCK_ACQUISITION_FAILED(ErrorCode.LOCK_ACQUISITION_FAILED, "exception.lock.acquisition_failed", LogLevel.ERROR);
+    LOCK_ACQUISITION_FAILED(ErrorCode.LOCK_ACQUISITION_FAILED, "exception.lock.acquisition_failed", LogLevel.ERROR),
+    RESERVATION_REQUEST_BLOCKED(ErrorCode.TOO_MANY_REQUESTS, "exception.reservation.request_blocked", LogLevel.WARN),
+    IP_BLOCKED(ErrorCode.TOO_MANY_REQUESTS, "exception.ip_blocked", LogLevel.WARN);
 
     private final ErrorCode errorCode;
     private final String messageKey;
